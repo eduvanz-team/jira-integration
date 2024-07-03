@@ -45,8 +45,8 @@ jobs:
     - name: Checkout jira-integration repository content
       uses: actions/checkout@v4
       with:
-        repository: eduvanz-team/jira-integration-private
-        path: jira-integration-private
+        repository: eduvanz-team/jira-integration
+        path: jira-integration
 
     - name: Set up Node.js
       uses: actions/setup-node@v4
@@ -55,7 +55,7 @@ jobs:
 
     - name: Install dependencies
       run: npm install
-      working-directory: ./jira-integration-private
+      working-directory: ./jira-integration
 
     - name: Send Slack Notifications
       env:
@@ -70,7 +70,7 @@ jobs:
         IS_WORKFLOW_YML_CHANGED: ${{ 'no' }}
         WORKFLOW_RUN: ${{ 'merged' }}
       run: node slackNotifications.js
-      working-directory: ./jira-integration-private
+      working-directory: ./jira-integration
 
     - name: Adding comment to issues
       env:
@@ -84,4 +84,4 @@ jobs:
         BRANCH_NAME: ${{ github.ref_name }}
         DEVELOPER_USERNAME: ${{ env.developer_username }}
       run: node addComment.js
-      working-directory: ./jira-integration-private
+      working-directory: ./jira-integration
