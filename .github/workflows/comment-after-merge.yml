@@ -45,8 +45,8 @@ jobs:
     - name: Checkout jira-integration repository content
       uses: actions/checkout@v4
       with:
-        repository: jgmeet/jira-integration
-        path: jira-integration
+        repository: eduvanz-team/jira-integration-private
+        path: jira-integration-private
 
     - name: Set up Node.js
       uses: actions/setup-node@v4
@@ -55,23 +55,28 @@ jobs:
 
     - name: Install dependencies
       run: npm install
-      working-directory: ./jira-integration
+      working-directory: ./jira-integration-private
 
     - name: Send Slack Notifications
       env:
         EMAIL: ${{ secrets.EMAIL }}
         API_TOKEN: ${{ secrets.API_TOKEN }}
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        JIRA_URL: ${{ secrets.JIRA_URL }}
+        SLACK_INFRA_CHANNEL: ${{ secrets.SLACK_INFRA_CHANNEL }}
+        SLACK_AGENT_NAME: ${{ secrets.SLACK_AGENT_NAME }}
         CM_IDS: ${{ env.cm_ids }}
         PR_URL: ${{ env.pr_url }}
+        IS_WORKFLOW_YML_CHANGED: ${{ 'no' }}
         WORKFLOW_RUN: ${{ 'merged' }}
       run: node slackNotifications.js
-      working-directory: ./jira-integration
+      working-directory: ./jira-integration-private
 
     - name: Adding comment to issues
       env:
         EMAIL: ${{ secrets.EMAIL }}
         API_TOKEN: ${{ secrets.API_TOKEN }}
+        JIRA_URL: ${{ secrets.JIRA_URL }}
         CM_IDS: ${{ env.cm_ids }}
         JIRA_IDS: ${{ env.jira_ids }}
         REPO_NAME: ${{ env.repo_name }}
@@ -79,4 +84,4 @@ jobs:
         BRANCH_NAME: ${{ github.ref_name }}
         DEVELOPER_USERNAME: ${{ env.developer_username }}
       run: node addComment.js
-      working-directory: ./jira-integration
+      working-directory: ./jira-integration-private

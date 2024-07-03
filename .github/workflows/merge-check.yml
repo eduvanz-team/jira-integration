@@ -81,6 +81,9 @@ jobs:
         EMAIL: ${{ secrets.EMAIL }}
         API_TOKEN: ${{ secrets.API_TOKEN }}
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        JIRA_URL: ${{ secrets.JIRA_URL }}
+        SLACK_INFRA_CHANNEL: ${{ secrets.SLACK_INFRA_CHANNEL }}
+        SLACK_AGENT_NAME: ${{ secrets.SLACK_AGENT_NAME }}
         CM_IDS: ${{ env.cm_ids }}
         PR_URL: ${{ env.pr_url }}
         IS_WORKFLOW_YML_CHANGED: ${{ env.isWorkflowYmlChanged }}
@@ -92,8 +95,10 @@ jobs:
       env:
         EMAIL: ${{ secrets.EMAIL }}
         API_TOKEN: ${{ secrets.API_TOKEN }}
+        JIRA_URL: ${{ secrets.JIRA_URL }}
         CM_IDS: ${{ env.cm_ids }}
         JIRA_IDS: ${{ env.jira_ids }}
         REPO_NAME: ${{ env.repo_name }}
+        
       run: node checkMergeDescriptionIDs.js
       working-directory: ./jira-integration
