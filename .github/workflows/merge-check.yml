@@ -65,7 +65,7 @@ jobs:
       uses: actions/checkout@v4
       with:
         repository: eduvanz-team/jira-integration-private
-        path: jira-integration
+        path: jira-integration-private
 
     - name: Set up Node.js
       uses: actions/setup-node@v4
@@ -74,7 +74,7 @@ jobs:
 
     - name: Install dependencies
       run: npm install
-      working-directory: ./jira-integration
+      working-directory: ./jira-integration-private
 
     - name: Send Slack Notifications
       env:
@@ -86,7 +86,7 @@ jobs:
         IS_WORKFLOW_YML_CHANGED: ${{ env.isWorkflowYmlChanged }}
         WORKFLOW_RUN: ${{ 'opened' }}
       run: node slackNotifications.js
-      working-directory: ./jira-integration
+      working-directory: ./jira-integration-private
 
     - name: Check IDs
       env:
@@ -96,4 +96,4 @@ jobs:
         JIRA_IDS: ${{ env.jira_ids }}
         REPO_NAME: ${{ env.repo_name }}
       run: node checkMergeDescriptionIDs.js
-      working-directory: ./jira-integration
+      working-directory: ./jira-integration-private
