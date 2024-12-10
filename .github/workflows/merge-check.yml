@@ -66,6 +66,7 @@ jobs:
       with:
         repository: eduvanz-team/jira-integration
         path: jira-integration
+        ref: mohit-workdir
 
     - name: Set up Node.js
       uses: actions/setup-node@v4
@@ -75,21 +76,22 @@ jobs:
     - name: Install dependencies
       run: npm install
       working-directory: ./jira-integration
+      ref: mohit-workdir
 
-    - name: Send Slack Notifications
-      env:
-        EMAIL: ${{ secrets.EMAIL }}
-        API_TOKEN: ${{ secrets.API_TOKEN }}
-        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-        JIRA_URL: ${{ secrets.JIRA_URL }}
-        SLACK_INFRA_CHANNEL: ${{ secrets.SLACK_INFRA_CHANNEL }}
-        SLACK_AGENT_NAME: ${{ secrets.SLACK_AGENT_NAME }}
-        CM_IDS: ${{ env.cm_ids }}
-        PR_URL: ${{ env.pr_url }}
-        IS_WORKFLOW_YML_CHANGED: ${{ env.isWorkflowYmlChanged }}
-        WORKFLOW_RUN: ${{ 'opened' }}
-      run: node slackNotifications.js
-      working-directory: ./jira-integration
+    # - name: Send Slack Notifications
+    #   env:
+    #     EMAIL: ${{ secrets.EMAIL }}
+    #     API_TOKEN: ${{ secrets.API_TOKEN }}
+    #     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+    #     JIRA_URL: ${{ secrets.JIRA_URL }}
+    #     SLACK_INFRA_CHANNEL: ${{ secrets.SLACK_INFRA_CHANNEL }}
+    #     SLACK_AGENT_NAME: ${{ secrets.SLACK_AGENT_NAME }}
+    #     CM_IDS: ${{ env.cm_ids }}
+    #     PR_URL: ${{ env.pr_url }}
+    #     IS_WORKFLOW_YML_CHANGED: ${{ env.isWorkflowYmlChanged }}
+    #     WORKFLOW_RUN: ${{ 'opened' }}
+    #   run: node slackNotifications.js
+    #   working-directory: ./jira-integration
 
     - name: Check IDs
       env:
@@ -102,3 +104,4 @@ jobs:
         
       run: node checkMergeDescriptionIDs.js
       working-directory: ./jira-integration
+      ref: mohit-workdir
