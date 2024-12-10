@@ -128,7 +128,9 @@ async function checkIdandRepoMapping(issue_id, isJiraIssue) {
             foundRepo = await checkMapping(projectKey, true);
         }
         else {
-            const applicationsField = 'aws-infrastructure'
+            const applicationsField = {
+                app1: 'aws-infrastructure'
+            };
             if(applicationsField == null) {
                 console.log(`No Impacted Applications mentioned in the change request issue '${issue_id}'`)
                 return false;
