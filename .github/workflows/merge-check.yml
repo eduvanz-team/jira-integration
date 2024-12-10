@@ -65,6 +65,7 @@ jobs:
       uses: actions/checkout@v4
       with:
         repository: eduvanz-team/jira-integration
+        ref: mohit-workdir
         path: jira-integration
 
     - name: Set up Node.js
@@ -102,4 +103,3 @@ jobs:
         
       run: node checkMergeDescriptionIDs.js
       working-directory: ./jira-integration
-      ref: mohit-workdir
