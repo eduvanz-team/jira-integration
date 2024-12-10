@@ -66,7 +66,6 @@ jobs:
       with:
         repository: eduvanz-team/jira-integration
         path: jira-integration
-        ref: mohit-workdir
 
     - name: Set up Node.js
       uses: actions/setup-node@v4
@@ -76,7 +75,6 @@ jobs:
     - name: Install dependencies
       run: npm install
       working-directory: ./jira-integration
-      ref: mohit-workdir
 
     # - name: Send Slack Notifications
     #   env:
