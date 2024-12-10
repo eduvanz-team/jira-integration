@@ -128,7 +128,7 @@ async function checkIdandRepoMapping(issue_id, isJiraIssue) {
             foundRepo = await checkMapping(projectKey, true);
         }
         else {
-            const applicationsField = dataFields.customfield_10337
+            const applicationsField = 'aws-infrastructure'
             if(applicationsField == null) {
                 console.log(`No Impacted Applications mentioned in the change request issue '${issue_id}'`)
                 return false;
@@ -149,12 +149,6 @@ async function checkIdandRepoMapping(issue_id, isJiraIssue) {
         }
 
         if(!isJiraIssue) {
-            // if request type is emergency, then no need to check
-            // for jira id's in description
-            const requestType = dataFields.customfield_10333;
-            if(requestType !== null && requestType.value == 'Emergency') {
-                return true;
-            }
 
             // check that Jira Id's provided in PR description
             // are exact with the ones mentioned in CM linked issues
