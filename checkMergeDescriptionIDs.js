@@ -136,10 +136,12 @@ async function checkIdandRepoMapping(issue_id, isJiraIssue) {
                 return false;
             }
 
-            const size = Object.keys(applicationsField).length;
-            for(let i=0; i<size; i++) {
-                foundRepo = await checkMapping(applicationsField[i].value, false);
-                if(foundRepo) break;
+            
+            const keys = Object.keys(applicationsField); // Get an array of keys
+            for (let i = 0; i < keys.length; i++) {
+                const value = applicationsField[keys[i]]; 
+                const foundRepo = await checkMapping(applicationsField[keys[i]], false);
+                if (foundRepo) break;
             }
         }
 
