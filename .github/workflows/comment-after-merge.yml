@@ -57,7 +57,6 @@ jobs:
     - name: Install dependencies
       run: npm install
       working-directory: ./jira-integration
-      ref: mohit-workdir
 
     - name: Send Slack Notifications
       env:
@@ -87,4 +86,3 @@ jobs:
         DEVELOPER_USERNAME: ${{ env.developer_username }}
       run: node addComment.js
       working-directory: ./jira-integration
-      ref: mohit-workdir
